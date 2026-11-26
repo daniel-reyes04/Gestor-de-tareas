@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor de Tareas</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1A1A1A">
+</head>
+<body>
+  <main class="app">
+    <h1>Gestor de Tareas</h1>
+    <p class="subtitulo">Proyecto base — Electiva PWA, cierre de los Bloques 1 y 2.</p>
+
+    <form id="form-tarea" class="form-tarea">
+      <input type="text" id="input-titulo" placeholder="Nueva tarea..." required>
+      <select id="input-prioridad">
+        <option value="baja">Baja</option>
+        <option value="media" selected>Media</option>
+        <option value="alta">Alta</option>
+      </select>
+
+      <div style="margin: 15px 0; padding: 10px; border: 1px dashed #ccc;">
+        <button type="button" id="btn-deshacer" style="display: none;">↩ Deshacer eliminación</button>
+        <button type="button" id="btn-sensores">📳 Activar agitar para deshacer</button>
+        <span id="texto-orientacion" style="font-size: 0.85em; color: #666; display: block; margin-top: 5px;"></span>
+      </div>
+      
+      <!-- Campos opcionales para la nota privada y cifrado -->
+      <input type="text" id="input-nota" placeholder="Nota privada (opcional)">
+      <input type="password" id="input-contrasena" placeholder="Contraseña para cifrar nota">
+      
+      <!-- Controles de Hardware (Cámara, Ubicación y Micrófono) -->
+      <div class="controles-dispositivo" style="margin: 15px 0; display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; gap: 10px;">
+          <button type="button" id="btn-foto">📷 Foto</button>
+          <button type="button" id="btn-ubicacion">📍 Ubicación</button>
+          <button type="button" id="btn-microfono">🎤 Micrófono</button>
+        </div>
+        
+        <!-- Texto para mostrar la ubicación capturada temporalmente -->
+        <span id="texto-ubicacion" style="font-size: 0.85em; color: #666;"></span>
+        
+        <!-- Medidor de audio oculto por defecto, se mostrará al activar el micrófono -->
+        <meter id="medidor-audio" min="0" max="1" value="0" style="display: none; width: 100%; height: 20px;"></meter>
+      </div>
+
+      <button type="submit">Agregar</button>
+    </form>
+
+    <ul id="lista-tareas" class="lista-tareas"></ul>
+
+    <!-- ======================================================= -->
+    <!-- NUEVO - SESIÓN 26: BARRA DE AVISOS Y ESTADO DE SYNC     -->
+    <!-- ======================================================= -->
+    <div style="margin-top: 20px; padding: 15px; border-top: 1px solid #ccc; text-align: center;">
+      <button type="button" id="btn-avisos" style="padding: 8px 12px; cursor: pointer;">
+        🔔 Activar avisos
+      </button>
+      <p id="estado-avisos" style="font-size: 0.85em; color: #666; margin-top: 8px;">
+        Avisos sin activar.
+      </p>
+      <p id="estado-sync" style="font-size: 0.85em; color: #666;">
+        Todo sincronizado con el servidor.
+      </p>
+    </div>
+
+  </main>
+
+  <dialog id="dlg-camara" style="padding: 15px; border-radius: 8px; border: 1px solid #ccc;">
+    <video id="video-camara" autoplay playsinline style="max-width: 100%; background: #000;"></video>
+    <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;">
+      <button type="button" id="btn-capturar-foto">Capturar Foto</button>
+      <button type="button" id="btn-cerrar-camara">Cancelar</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
